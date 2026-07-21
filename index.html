@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Diffusion ReRoll keeps robotic sequence predictions revisable through structured re-noising and cross-horizon refinement."
+    />
+    <meta
+      name="keywords"
+      content="Diffusion ReRoll, diffusion models, robot learning, sequential prediction, planning, policy learning, world models"
+    />
+    <meta name="theme-color" content="#f8f9fc" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Diffusion ReRoll" />
+    <meta
+      property="og:description"
+      content="Revisable denoising for robotic sequential prediction."
+    />
+    <meta property="og:image" content="static/images/fig1.png" />
+
+    <title>Diffusion ReRoll: Revisable Denoising for Robotic Sequential Prediction</title>
+    <link rel="stylesheet" href="static/css/index.css" />
+    <script defer src="static/js/index.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header" id="top">
+      <div class="shell nav-shell">
+        <a class="wordmark" href="#top" aria-label="Diffusion ReRoll home">
+          <span class="wordmark-mark" aria-hidden="true"></span>
+          <span>Diffusion ReRoll</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a href="#overview">Overview</a>
+          <a href="#method">Method</a>
+          <a href="#results">Results</a>
+          <a href="#citation">Citation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section-space">
+        <div class="shell narrow center">
+          <h1>
+            Diffusion <span class="gradient-text">ReRoll</span>
+          </h1>
+          <p class="subtitle">Revisable Denoising for Robotic Sequential Prediction</p>
+          <p class="hero-claim">
+            A diffusion process that respects the <strong>temporal meaning</strong> of a
+            sequence—and preserves <strong>cross-horizon revisability</strong>.
+          </p>
+
+          <div class="authors" aria-label="Authors">
+            <a href="https://seonsoo-p1.github.io/DMCM/#" rel="noreferrer">Seonsoo Kim</a>
+            <span>Seongil Hong</span>
+            <a href="https://jgkang1210.github.io/" rel="noreferrer">Jun-Gill Kang</a>
+          </div>
+          <p class="affiliation">Agency for Defense Development (ADD)</p>
+
+          <div class="button-row" aria-label="Project resources">
+            <span class="resource-button disabled" aria-disabled="true" title="Paper link coming soon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 2.75h8l4 4V21.25H6z"/><path d="M14 2.75v4h4M9 11h6M9 15h6"/></svg>
+              Paper
+            </span>
+            <span class="resource-button disabled" aria-disabled="true" title="Code link coming soon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8.5 7-5 5 5 5M15.5 7l5 5-5 5M13.5 4l-3 16"/></svg>
+              Code
+            </span>
+            <a class="resource-button" href="#project-video">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>
+              Video
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="video-showcase" id="project-video" aria-labelledby="video-title">
+        <div class="shell video-shell">
+          <div class="video-heading">
+            <p class="section-kicker">Project video</p>
+            <h2 id="video-title">Diffusion ReRoll at a glance</h2>
+          </div>
+          <div class="video-frame">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="static/images/fig1.png"
+              aria-label="Diffusion ReRoll project overview video"
+            >
+              <source src="static/images/video/Diffusion_ReRoll_Video.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          </div>
+          <p class="video-note">
+            Full project video · 2 minutes 57 seconds
+          </p>
+        </div>
+      </section>
+
+      <section class="denoising-showcase" id="overview" aria-labelledby="denoising-title">
+        <div class="shell">
+          <div class="section-intro center narrow">
+            <p class="section-kicker">Overview · Three denoising processes</p>
+            <h2 id="denoising-title">The schedule changes how information moves.</h2>
+            <p>
+              The same sequential prediction problem produces very different behavior depending on
+              which horizon regions remain uncertain, resolve first, or become revisable again.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-card process-full">
+              <div class="process-media">
+                <img
+                  src="static/media/diffuser_task4.gif"
+                  alt="Animated full-sequence diffusion trajectory denoising"
+                  width="640"
+                  height="480"
+                  fetchpriority="high"
+                />
+              </div>
+              <p class="process-index">01 · Equal noise level</p>
+              <h3>Full-sequence diffusion</h3>
+              <p>
+                Every sequential timestep denoises together, without an explicit temporal order.
+              </p>
+            </article>
+
+            <article class="process-card process-causal">
+              <div class="process-media">
+                <img
+                  src="static/media/forcing_task4.gif"
+                  alt="Animated Diffusion Forcing causal trajectory denoising"
+                  width="640"
+                  height="480"
+                  fetchpriority="high"
+                />
+              </div>
+              <p class="process-index">02 · Left-to-right order</p>
+              <h3>Causal denoising</h3>
+              <p>
+                Earlier timesteps resolve first, giving the diffusion process temporal direction.
+              </p>
+            </article>
+
+            <article class="process-card process-reroll">
+              <div class="process-media">
+                <img
+                  src="static/media/reroll_task4.gif"
+                  alt="Animated Diffusion ReRoll trajectory denoising and revision"
+                  width="640"
+                  height="480"
+                  fetchpriority="high"
+                />
+              </div>
+              <p class="process-index">03 · Revisable denoising waves</p>
+              <h3>Diffusion ReRoll</h3>
+              <p>
+                Periodic re-noising reopens resolved regions so updated context can revise them.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="robotics-showcase section-space soft-section" aria-labelledby="robotics-title">
+        <div class="shell">
+          <div class="robotics-heading">
+            <div>
+              <p class="section-kicker">Robotics scope</p>
+              <h2 id="robotics-title">One principle across robotic sequential prediction</h2>
+            </div>
+            <p>
+              ReRoll is evaluated beyond maze generation: it refines planned states, robot action
+              chunks, and coupled video–action sequences.
+            </p>
+          </div>
+
+          <div class="robotics-grid">
+            <article class="robotics-card">
+              <div class="robotics-image">
+                <img
+                  src="static/images/video/application-planning.jpg"
+                  alt="Long-horizon maze planning trajectory"
+                  width="720"
+                  height="540"
+                  loading="lazy"
+                />
+              </div>
+              <div class="robotics-card-body">
+                <p class="robotics-type">Offline RL benchmark</p>
+                <h3>Long-horizon planning</h3>
+                <p>Goal guidance and endpoint inpainting on OGBench PointMaze and AntMaze.</p>
+                <span>Guidance · Inpainting</span>
+              </div>
+            </article>
+
+            <article class="robotics-card">
+              <div class="robotics-image">
+                <img
+                  src="static/images/video/application-policy.jpg"
+                  alt="Robot manipulation scene for diffusion-policy-style action prediction"
+                  width="720"
+                  height="508"
+                  loading="lazy"
+                />
+              </div>
+              <div class="robotics-card-body">
+                <p class="robotics-type">Diffusion Policy based</p>
+                <h3>Robot action generation</h3>
+                <p>
+                  LIBERO-10 multi-task and RoboCasa single-task learning with different prediction
+                  horizons and observation-history lengths.
+                </p>
+                <span>LIBERO-10 · RoboCasa</span>
+              </div>
+            </article>
+
+            <article class="robotics-card">
+              <div class="robotics-image">
+                <img
+                  src="static/images/video/application-uwm.jpg"
+                  alt="Generated robot video frames paired with a generated end-effector path"
+                  width="900"
+                  height="390"
+                  loading="lazy"
+                />
+              </div>
+              <div class="robotics-card-body">
+                <p class="robotics-type">UWM based</p>
+                <h3>Unified video–action generation</h3>
+                <p>Policy, inverse dynamics, future-video prediction, and action–video alignment.</p>
+                <span>Video · Action · Alignment</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="temporal-thesis" aria-labelledby="temporal-title">
+        <div class="shell temporal-layout">
+          <div>
+            <p class="section-kicker light">Core perspective</p>
+            <h2 id="temporal-title">Sequential tokens have temporal meaning.</h2>
+          </div>
+          <div class="temporal-copy">
+            <p>
+              Earlier and later states, actions, and frames are not interchangeable. Their noise
+              levels determine what is visible, uncertain, and still modifiable during generation.
+            </p>
+            <p>
+              ReRoll turns this noise schedule into a cross-horizon refinement mechanism: resolved
+              regions can become uncertain again, exchange information with the rest of the horizon,
+              and settle into a more compatible sequence.
+            </p>
+            <div class="concept-row" aria-label="Core concepts">
+              <span>Temporal meaning</span>
+              <span>Uncertainty control</span>
+              <span>Cross-horizon revision</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="failure-section section-space" aria-labelledby="failure-title">
+        <div class="shell">
+          <p class="section-kicker">Characteristic mistakes</p>
+          <h2 id="failure-title">What fails when the horizon cannot revise?</h2>
+          <p class="failure-lead">
+            The problem is not simply whether denoising is global or causal. The crucial question is
+            whether early decisions can still change after new cross-horizon context becomes useful.
+          </p>
+
+          <div class="failure-grid">
+            <article class="failure-card failure-red">
+              <div class="failure-image">
+                <img
+                  src="static/images/video/full-sequence-failure.jpg"
+                  alt="Full-sequence diffusion committing errors, missing the goal, and passing through maze walls"
+                  width="1920"
+                  height="1080"
+                  loading="lazy"
+                />
+              </div>
+              <div class="failure-card-body">
+                <p class="failure-label">Full-sequence diffusion</p>
+                <h3>Early global errors get committed.</h3>
+                <p>
+                  Treating all timesteps equally provides global interaction, but does not express
+                  which regions should stay uncertain for later correction.
+                </p>
+              </div>
+            </article>
+
+            <article class="failure-card failure-amber">
+              <div class="failure-image">
+                <img
+                  src="static/images/video/causal-prefix-lock.jpg"
+                  alt="Causal denoising locking an erroneous trajectory prefix before later context is resolved"
+                  width="1920"
+                  height="1080"
+                  loading="lazy"
+                />
+              </div>
+              <div class="failure-card-body">
+                <p class="failure-label">Causal denoising</p>
+                <h3>Temporal order can lock a wrong prefix.</h3>
+                <p>
+                  Causal noise levels add temporal meaning, but low-noise prefixes become difficult to
+                  revise when later predictions reveal a mismatch.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <article class="revision-panel">
+            <div class="revision-image">
+              <img
+                src="static/images/video/reroll-revision.jpg"
+                alt="Diffusion ReRoll exploring revisable candidates and correcting an early denoising error"
+                width="1920"
+                height="1080"
+                loading="lazy"
+              />
+            </div>
+            <div class="revision-copy">
+              <p class="failure-label">Diffusion ReRoll</p>
+              <h3>An early mistake does not have to be final.</h3>
+              <p>
+                A ReRoll event re-noises the affected region. The model explores another compatible
+                candidate using updated context, naturally revising the earlier error.
+              </p>
+              <div class="revision-sequence">
+                <span>Early error</span><i aria-hidden="true">→</i><span>Re-noise</span><i aria-hidden="true">→</i><strong>Revise</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-space soft-section" id="abstract">
+        <div class="shell narrow">
+          <p class="section-kicker">Abstract</p>
+          <h2>Iterative refinement across the prediction horizon</h2>
+          <p class="abstract">
+            Diffusion-based sequence predictors commonly follow a single, irreversible denoising
+            process. Diffusion ReRoll instead selectively re-noises sufficiently resolved regions
+            while the rest of the horizon continues denoising. These regions can then be refined
+            again using updated context from the sequence. The resulting structured re-noising
+            enables cross-horizon refinement while preserving local consistency. Across long-horizon
+            planning, diffusion-policy-style action prediction, and unified video–action modeling,
+            ReRoll improves performance over full-sequence and causal denoising baselines.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-space" id="method">
+        <div class="shell">
+          <div class="method-heading">
+            <div>
+              <p class="section-kicker">Method</p>
+              <h2>A programmable refinement schedule</h2>
+            </div>
+            <p>
+              ReRoll changes the token-wise noise schedule—not the underlying denoising
+              architecture—to control when information can be revised across a sequence.
+            </p>
+          </div>
+
+          <figure class="method-visual">
+            <img
+              src="static/images/method/deployment-scheduling.png"
+              alt="Diffusion ReRoll deployment schedule with piecewise-linear noise levels and periodic noise injection"
+              width="2048"
+              height="1077"
+              loading="lazy"
+            />
+            <figcaption class="method-visual-copy">
+              <p class="card-label">Deployment schedule</p>
+              <h3>Piecewise-linear denoising with periodic noise injection.</h3>
+              <p>
+                Linear noise-level chunks move across the prediction horizon. At the reset level, a
+                ReRoll event raises uncertainty in a resolved region, connects it to the next
+                denoising wave, and makes that region revisable again.
+              </p>
+            </figcaption>
+          </figure>
+
+          <figure class="method-visual method-visual-training">
+            <img
+              src="static/images/method/training-noise-levels.png"
+              alt="Training Diffusion ReRoll with corresponding linear noise-level assignments, including bidirectional schedules"
+              width="2047"
+              height="538"
+              loading="lazy"
+            />
+            <figcaption class="method-visual-copy">
+              <p class="card-label">Training schedule</p>
+              <h3>Train on the corresponding linear noise patterns.</h3>
+              <p>
+                Diffusion Forcing introduced the noise-as-masking view by assigning different noise
+                levels to different sequence positions. ReRoll builds on that idea with randomized
+                piecewise-linear assignments, including reversed chunks for bidirectional generation.
+              </p>
+            </figcaption>
+          </figure>
+
+          <ol class="method-steps">
+            <li>
+              <span class="step-number">01</span>
+              <div>
+                <h3>Noise as masking</h3>
+                <p>
+                  <strong>This idea comes from Diffusion Forcing:</strong> a token's noise level acts
+                  like a soft mask, controlling how much information is visible and how freely the
+                  token can still change.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">02</span>
+              <div>
+                <h3>Linear-chunk training</h3>
+                <p>
+                  Randomized piecewise-linear profiles expose the model to the partial-information
+                  patterns used at deployment.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">03</span>
+              <div>
+                <h3>ReRoll and revise</h3>
+                <p>
+                  Periodic noise injection reopens resolved regions so updated context can correct
+                  them across the horizon.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="takeaway">
+            <span class="takeaway-label">Key idea</span>
+            <p>
+              Noise is not only removed—it is actively managed as a mechanism for revising sequential
+              predictions.
+            </p>
+          </div>
+
+          <div class="bidirectional-note" id="bidirectional-mode">
+            <p class="card-label">Bidirectional mode</p>
+            <h3>Let both endpoints guide revision.</h3>
+            <p>
+              When both initial and terminal constraints are available, forward and backward
+              denoising waves begin at opposite ends of the horizon. Their meeting point is
+              adjustable, and each side can use its own slope, reset noise level, and number of
+              ReRoll events. Unresolved regions remain noisy, so information from both endpoints can
+              continue revising the sequence.
+            </p>
+            <div class="bidirectional-flow" aria-label="Bidirectional information flow">
+              <span>Initial condition</span>
+              <i aria-hidden="true">→</i>
+              <strong>Revisable meeting region</strong>
+              <i aria-hidden="true">←</i>
+              <span>Terminal condition</span>
+            </div>
+          </div>
+
+          <figure class="bidirectional-panel">
+            <figcaption class="bidirectional-copy">
+              <p class="card-label">From the project video</p>
+              <h3>Two denoising fronts, one revisable horizon.</h3>
+              <p>
+                This clip shows the bidirectional schedule in motion, followed by endpoint-conditioned
+                examples in goal inpainting and inverse dynamics.
+              </p>
+              <div class="bidirectional-tags" aria-label="Bidirectional mode applications">
+                <span>Goal inpainting</span>
+                <span>Future-image conditioning</span>
+                <span>Inverse dynamics</span>
+              </div>
+            </figcaption>
+            <div class="bidirectional-media">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                aria-label="Bidirectional Diffusion ReRoll schedule and applications"
+              >
+                <source src="static/media/bidirectional-mode.mp4" type="video/mp4" />
+                Your browser does not support embedded video.
+              </video>
+            </div>
+          </figure>
+
+          <div class="bidirectional-mode-grid">
+            <article>
+              <p class="mode-label">Taking-over matrix</p>
+              <h3>Use terminal context early, finish causally.</h3>
+              <p>
+                Backward waves bring goal-side information into early revision. After the two sides
+                overlap, forward waves take over, preserving a more causal final prediction structure.
+              </p>
+              <span class="mode-use">Used for goal-inpainting maze planning</span>
+            </article>
+            <article>
+              <p class="mode-label">Meeting matrix</p>
+              <h3>Keep both directions active.</h3>
+              <p>
+                Forward and backward waves meet and repeatedly refine the sequence from both sides,
+                preserving terminal-to-initial influence throughout ReRoll.
+              </p>
+              <span class="mode-use">Used for unified video–action modeling</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-space results-section" id="results">
+        <div class="shell">
+          <p class="section-kicker light">Results</p>
+          <h2>One refinement principle, three robotic settings</h2>
+
+          <div class="result-grid">
+            <article class="result-card">
+              <div class="result-topline">
+                <span>Long-horizon planning</span>
+                <span class="dataset">OGBench</span>
+              </div>
+              <div class="metric-pair">
+                <span class="metric-before">72.8</span>
+                <span class="metric-arrow" aria-hidden="true">→</span>
+                <strong>88.1%</strong>
+              </div>
+              <p class="metric-caption">Guidance-based replanning success</p>
+              <div class="result-note">+21% relative over Diffusion Forcing</div>
+            </article>
+
+            <article class="result-card">
+              <div class="result-topline">
+                <span>Policy learning</span>
+                <span class="dataset">LIBERO-10</span>
+              </div>
+              <div class="metric-pair">
+                <span class="metric-before">40.1</span>
+                <span class="metric-arrow" aria-hidden="true">→</span>
+                <strong>62.7%</strong>
+              </div>
+              <p class="metric-caption">Average official-initialization success</p>
+              <div class="result-note">+57% relative over Diffusion Policy</div>
+            </article>
+
+            <article class="result-card">
+              <div class="result-topline">
+                <span>Video–action modeling</span>
+                <span class="dataset">UWM</span>
+              </div>
+              <div class="metric-pair">
+                <span class="metric-before">57.2</span>
+                <span class="metric-arrow" aria-hidden="true">→</span>
+                <strong>71.0%</strong>
+              </div>
+              <p class="metric-caption">OOD joint-policy success</p>
+              <div class="result-note">Zero-action error: 0.324 m → 0.301 m</div>
+            </article>
+          </div>
+
+          <p class="results-footnote">
+            Summary values are averages reported in the current manuscript. Full tables, per-task
+            results, and evaluation protocols will accompany the public paper release.
+          </p>
+
+          <figure class="reroll-events-figure" aria-labelledby="reroll-events-title">
+            <figcaption class="reroll-events-caption">
+              <div>
+                <p class="result-figure-label">Ablation · Noise injection</p>
+                <h3 id="reroll-events-title">ReRoll events drive repeated improvement.</h3>
+              </div>
+              <p>
+                With zero ReRoll events, re-noising is removed and the schedule reduces to causal
+                denoising. Adding selective noise-injection events improves long-horizon planning,
+                policy learning, and unified video–action modeling before performance saturates,
+                isolating repeated revision as a central source of the gains.
+              </p>
+            </figcaption>
+            <div class="reroll-events-plot">
+              <img
+                src="static/media/Result_ReRollEvents.png"
+                alt="Plots showing performance as the number of ReRoll events increases for long-horizon planning, policy learning, and unified video-action modeling"
+                width="4638"
+                height="1046"
+                loading="lazy"
+              />
+            </div>
+            <p class="plot-scroll-hint">Swipe horizontally to inspect all three settings →</p>
+            <div class="reroll-events-summary" aria-label="ReRoll event ablation takeaways">
+              <div><strong>0 events</strong><span>Causal denoising baseline</span></div>
+              <div><strong>More events</strong><span>More opportunities to revise</span></div>
+              <div><strong>At saturation</strong><span>Extra resets add little benefit</span></div>
+            </div>
+          </figure>
+
+          <div class="experiment-heading">
+            <p class="section-kicker light">Evaluation coverage</p>
+            <h3>Experiments across planning, policy learning, and joint prediction</h3>
+          </div>
+          <div class="experiment-grid">
+            <article>
+              <span class="experiment-index">01</span>
+              <p class="experiment-domain">OGBench</p>
+              <h4>Guidance-based planning and goal inpainting</h4>
+              <p>Long-horizon PointMaze and AntMaze tasks test both guided generation and terminal conditioning.</p>
+            </article>
+            <article>
+              <span class="experiment-index">02</span>
+              <p class="experiment-domain">LIBERO-10</p>
+              <h4>Multi-task policy learning</h4>
+              <p>A Diffusion Policy-based model predicts action chunks across ten manipulation tasks.</p>
+            </article>
+            <article>
+              <span class="experiment-index">03</span>
+              <p class="experiment-domain">RoboCasa</p>
+              <h4>Single-task learning across temporal contexts</h4>
+              <p>Different prediction horizons and observation-history lengths test robustness to sequence design.</p>
+            </article>
+            <article>
+              <span class="experiment-index">04</span>
+              <p class="experiment-domain">Video–action modeling</p>
+              <h4>Joint generation and action–video alignment</h4>
+              <p>UWM-based experiments evaluate future video, action prediction, inverse dynamics, and their alignment.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="conclusion-section section-space" aria-labelledby="conclusion-title">
+        <div class="shell conclusion-layout">
+          <div>
+            <p class="section-kicker">Conclusion</p>
+            <h2 id="conclusion-title">Keep uncertainty where revision still matters.</h2>
+          </div>
+          <div class="conclusion-copy">
+            <p>
+              Diffusion ReRoll treats the noise schedule as a mechanism for information flow across
+              time. By periodically restoring uncertainty, it preserves temporal structure without
+              permanently locking early predictions.
+            </p>
+            <p>
+              The same principle improves long-horizon planning, manipulation-policy learning, and
+              coupled video–action generation—providing a general route to revisable robotic
+              sequential prediction.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-space soft-section" id="citation">
+        <div class="shell narrow">
+          <p class="section-kicker">BibTeX</p>
+          <div class="citation-heading">
+            <h2>Cite Diffusion ReRoll</h2>
+            <button class="copy-button" type="button" data-copy-target="bibtex">
+              Copy BibTeX
+            </button>
+          </div>
+          <pre id="bibtex"><code>@misc{kim2026diffusionreroll,
+  title   = {Diffusion ReRoll: Revisable Denoising for
+             Robotic Sequential Prediction},
+  author  = {Kim, Seonsoo and Hong, Seongil and Kang, Jun-Gill},
+  year    = {2026}
+}</code></pre>
+          <p class="copy-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <p>Diffusion ReRoll · 2026</p>
+        <p>
+          Page format inspired by
+          <a href="https://nerfies.github.io/" rel="noreferrer">Nerfies</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
