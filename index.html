@@ -166,6 +166,10 @@
               </p>
             </article>
           </div>
+          <p class="process-visual-note">
+            <strong>Visualization:</strong> predicted clean trajectories x̂<sub>0</sub> are shown in
+            all three animations.
+          </p>
         </div>
       </section>
 
@@ -375,10 +379,10 @@
 
           <figure class="method-visual">
             <img
-              src="static/images/method/deployment-scheduling.png"
+              src="static/media/New_Deployment.png"
               alt="Diffusion ReRoll deployment schedule with piecewise-linear noise levels and periodic noise injection"
-              width="2048"
-              height="1077"
+              width="5337"
+              height="2387"
               loading="lazy"
             />
             <figcaption class="method-visual-copy">
@@ -394,10 +398,10 @@
 
           <figure class="method-visual method-visual-training">
             <img
-              src="static/images/method/training-noise-levels.png"
+              src="static/media/New_Training_Assignment.png"
               alt="Training Diffusion ReRoll with corresponding linear noise-level assignments, including bidirectional schedules"
-              width="2047"
-              height="538"
+              width="6437"
+              height="1818"
               loading="lazy"
             />
             <figcaption class="method-visual-copy">
@@ -453,72 +457,98 @@
             </p>
           </div>
 
-          <div class="bidirectional-note" id="bidirectional-mode">
-            <p class="card-label">Bidirectional mode</p>
-            <h3>Let both endpoints guide revision.</h3>
-            <p>
-              When both initial and terminal constraints are available, forward and backward
-              denoising waves begin at opposite ends of the horizon. Their meeting point is
-              adjustable, and each side can use its own slope, reset noise level, and number of
-              ReRoll events. Unresolved regions remain noisy, so information from both endpoints can
-              continue revising the sequence.
-            </p>
-            <div class="bidirectional-flow" aria-label="Bidirectional information flow">
-              <span>Initial condition</span>
-              <i aria-hidden="true">→</i>
-              <strong>Revisable meeting region</strong>
-              <i aria-hidden="true">←</i>
-              <span>Terminal condition</span>
-            </div>
-          </div>
-
-          <figure class="bidirectional-panel">
-            <figcaption class="bidirectional-copy">
-              <p class="card-label">From the project video</p>
-              <h3>Two denoising fronts, one revisable horizon.</h3>
+          <section
+            class="bidirectional-group"
+            id="bidirectional-mode"
+            aria-labelledby="bidirectional-title"
+          >
+            <div class="bidirectional-note">
+              <p class="card-label">Bidirectional mode</p>
+              <h3 id="bidirectional-title">Let both endpoints guide revision.</h3>
               <p>
-                This clip shows the bidirectional schedule in motion, followed by endpoint-conditioned
-                examples in goal inpainting and inverse dynamics.
+                When both initial and terminal constraints are available, forward and backward
+                denoising waves begin at opposite ends of the horizon. Their meeting point is
+                adjustable, and each side can use its own slope, reset noise level, and number of
+                ReRoll events. Unresolved regions remain noisy, so information from both endpoints can
+                continue revising the sequence.
               </p>
-              <div class="bidirectional-tags" aria-label="Bidirectional mode applications">
-                <span>Goal inpainting</span>
-                <span>Future-image conditioning</span>
-                <span>Inverse dynamics</span>
+              <div class="bidirectional-flow" aria-label="Bidirectional information flow">
+                <span>Initial condition</span>
+                <i aria-hidden="true">→</i>
+                <strong>Revisable meeting region</strong>
+                <i aria-hidden="true">←</i>
+                <span>Terminal condition</span>
               </div>
-            </figcaption>
-            <div class="bidirectional-media">
-              <video
-                controls
-                playsinline
-                preload="metadata"
-                aria-label="Bidirectional Diffusion ReRoll schedule and applications"
-              >
-                <source src="static/media/bidirectional-mode.mp4" type="video/mp4" />
-                Your browser does not support embedded video.
-              </video>
             </div>
-          </figure>
 
-          <div class="bidirectional-mode-grid">
-            <article>
-              <p class="mode-label">Taking-over matrix</p>
-              <h3>Use terminal context early, finish causally.</h3>
-              <p>
-                Backward waves bring goal-side information into early revision. After the two sides
-                overlap, forward waves take over, preserving a more causal final prediction structure.
-              </p>
-              <span class="mode-use">Used for goal-inpainting maze planning</span>
-            </article>
-            <article>
-              <p class="mode-label">Meeting matrix</p>
-              <h3>Keep both directions active.</h3>
-              <p>
-                Forward and backward waves meet and repeatedly refine the sequence from both sides,
-                preserving terminal-to-initial influence throughout ReRoll.
-              </p>
-              <span class="mode-use">Used for unified video–action modeling</span>
-            </article>
-          </div>
+            <figure class="bidirectional-panel">
+              <figcaption class="bidirectional-copy">
+                <p class="card-label">From the project video</p>
+                <h3>Two denoising fronts, one revisable horizon.</h3>
+                <p>
+                  This clip shows the bidirectional schedule in motion, followed by endpoint-conditioned
+                  examples in goal inpainting and inverse dynamics.
+                </p>
+                <div class="bidirectional-tags" aria-label="Bidirectional mode applications">
+                  <span>Goal inpainting</span>
+                  <span>Future-image conditioning</span>
+                  <span>Inverse dynamics</span>
+                </div>
+              </figcaption>
+              <div class="bidirectional-media">
+                <video
+                  controls
+                  playsinline
+                  preload="metadata"
+                  aria-label="Bidirectional Diffusion ReRoll schedule and applications"
+                >
+                  <source src="static/media/bidirectional-mode.mp4" type="video/mp4" />
+                  Your browser does not support embedded video.
+                </video>
+              </div>
+            </figure>
+
+            <figure class="bidirectional-matrix">
+              <div class="bidirectional-matrix-image">
+                <img
+                  src="static/media/Backward_Both.png"
+                  alt="Comparison of taking-over and meeting bidirectional schedule matrices"
+                  width="6336"
+                  height="1389"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption class="bidirectional-matrix-copy">
+                <p class="card-label">Matrix behavior</p>
+                <h3>Choose how long backward context remains active.</h3>
+                <p>
+                  Taking over uses terminal-side context early and then returns to forward revision.
+                  Meeting preserves backward-driven context throughout ReRoll.
+                </p>
+              </figcaption>
+            </figure>
+
+            <div class="bidirectional-mode-grid">
+              <article>
+                <p class="mode-label">Taking-over matrix</p>
+                <h3>Use terminal context early, finish causally.</h3>
+                <p>
+                  Backward waves bring goal-side information into early revision. After the two sides
+                  overlap, forward waves take over, preserving a more causal final prediction structure.
+                </p>
+                <span class="mode-use">Used for goal-inpainting maze planning</span>
+              </article>
+              <article>
+                <p class="mode-label">Meeting matrix</p>
+                <h3>Keep both directions active.</h3>
+                <p>
+                  Forward and backward waves meet and repeatedly refine the sequence from both sides,
+                  preserving terminal-to-initial influence throughout ReRoll.
+                </p>
+                <span class="mode-use">Used for unified video–action modeling</span>
+              </article>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -567,14 +597,9 @@
                 <strong>71.0%</strong>
               </div>
               <p class="metric-caption">OOD joint-policy success</p>
-              <div class="result-note">Zero-action error: 0.324 m → 0.301 m</div>
+              <div class="result-note">Video–action alignment error: 0.324 m → 0.301 m</div>
             </article>
           </div>
-
-          <p class="results-footnote">
-            Summary values are averages reported in the current manuscript. Full tables, per-task
-            results, and evaluation protocols will accompany the public paper release.
-          </p>
 
           <figure class="reroll-events-figure" aria-labelledby="reroll-events-title">
             <figcaption class="reroll-events-caption">
@@ -685,7 +710,8 @@
         <p>Diffusion ReRoll · 2026</p>
         <p>
           Page format inspired by
-          <a href="https://nerfies.github.io/" rel="noreferrer">Nerfies</a>.
+          <a href="https://nerfies.github.io/" rel="noreferrer">Nerfies</a>. Layout and
+          implementation developed with assistance from ChatGPT.
         </p>
       </div>
     </footer>

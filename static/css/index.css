@@ -559,6 +559,17 @@ a.resource-button:focus-visible {
   line-height: 1.55;
 }
 
+.process-visual-note {
+  margin: 18px auto 0;
+  color: #737a8c;
+  font-size: 12px;
+  text-align: center;
+}
+
+.process-visual-note strong {
+  color: #50586c;
+}
+
 .robotics-heading {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -742,6 +753,7 @@ a.resource-button:focus-visible {
 .revision-copy h3,
 .method-visual-copy h3,
 .bidirectional-copy h3,
+.bidirectional-matrix-copy h3,
 .bidirectional-note h3 {
   margin: 0;
   font-size: 24px;
@@ -753,6 +765,7 @@ a.resource-button:focus-visible {
 .revision-copy > p:not(.failure-label),
 .method-visual-copy > p:not(.card-label),
 .bidirectional-copy > p:not(.card-label),
+.bidirectional-matrix-copy > p:not(.card-label),
 .bidirectional-note > p:not(.card-label) {
   margin: 12px 0 0;
   color: var(--muted);
@@ -937,11 +950,22 @@ a.resource-button:focus-visible {
   line-height: 1.45;
 }
 
+.bidirectional-group {
+  margin-top: 22px;
+  padding: 24px;
+  border: 1px solid rgba(124, 71, 234, 0.25);
+  border-radius: calc(var(--radius) + 4px);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(124, 71, 234, 0.12), transparent 30%),
+    #f8f7fd;
+  box-shadow: 0 18px 46px rgba(71, 49, 122, 0.08);
+}
+
 .bidirectional-panel {
   display: grid;
   grid-template-columns: 0.68fr 1.32fr;
   overflow: hidden;
-  margin-top: 22px;
+  margin: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: white;
@@ -955,13 +979,8 @@ a.resource-button:focus-visible {
 }
 
 .bidirectional-note {
-  margin-top: 22px;
-  padding: 34px;
-  border: 1px solid rgba(124, 71, 234, 0.25);
-  border-radius: var(--radius);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(124, 71, 234, 0.12), transparent 34%),
-    #f8f7fd;
+  margin: 0;
+  padding: 10px 10px 30px;
 }
 
 .bidirectional-note > p:not(.card-label) {
@@ -1027,6 +1046,36 @@ a.resource-button:focus-visible {
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 0.03em;
+}
+
+.bidirectional-matrix {
+  display: grid;
+  grid-template-columns: 1.38fr 0.62fr;
+  overflow: hidden;
+  margin: 16px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+}
+
+.bidirectional-matrix-image {
+  display: flex;
+  align-items: center;
+  padding: 24px 20px;
+  border-right: 1px solid var(--line);
+  background: white;
+}
+
+.bidirectional-matrix-image img {
+  width: 100%;
+  height: auto;
+}
+
+.bidirectional-matrix-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
 }
 
 .bidirectional-mode-grid {
@@ -1173,14 +1222,6 @@ a.resource-button:focus-visible {
   color: #8fe1ff;
   font-size: 13px;
   font-weight: 700;
-}
-
-.results-footnote {
-  max-width: 780px;
-  margin: 24px 0 0;
-  color: #929bb9;
-  font-size: 12px;
-  line-height: 1.6;
 }
 
 .reroll-events-figure {
@@ -1490,6 +1531,7 @@ footer {
   .method-visual,
   .reroll-events-caption,
   .bidirectional-panel,
+  .bidirectional-matrix,
   .conclusion-layout {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -1529,6 +1571,15 @@ footer {
 
   .bidirectional-panel {
     gap: 0;
+  }
+
+  .bidirectional-matrix {
+    gap: 0;
+  }
+
+  .bidirectional-matrix-image {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 
   .bidirectional-media {
@@ -1647,7 +1698,8 @@ footer {
   .robotics-heading,
   .temporal-layout,
   .method-visual,
-  .bidirectional-panel {
+  .bidirectional-panel,
+  .bidirectional-matrix {
     gap: 18px;
   }
 
@@ -1659,9 +1711,19 @@ footer {
   .revision-copy,
   .method-visual-copy,
   .bidirectional-copy,
+  .bidirectional-matrix-copy,
   .bidirectional-note,
   .reroll-events-caption {
     padding: 23px;
+  }
+
+  .bidirectional-group {
+    padding: 10px;
+    border-radius: 18px;
+  }
+
+  .bidirectional-note {
+    padding: 13px 13px 24px;
   }
 
   .reroll-events-plot {
@@ -1688,6 +1750,7 @@ footer {
   .revision-copy h3,
   .method-visual-copy h3,
   .bidirectional-copy h3,
+  .bidirectional-matrix-copy h3,
   .bidirectional-note h3 {
     font-size: 21px;
   }
