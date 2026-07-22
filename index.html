@@ -23,6 +23,7 @@
     <meta property="og:image" content="static/images/fig1.png" />
 
     <title>Diffusion ReRoll: Revisable Denoising for Robotic Sequential Prediction</title>
+    <link rel="icon" type="image/png" href="static/media/ReRollIcon.png" />
     <link rel="stylesheet" href="static/css/index.css" />
     <script defer src="static/js/index.js"></script>
   </head>
@@ -31,7 +32,14 @@
     <header class="site-header" id="top">
       <div class="shell nav-shell">
         <a class="wordmark" href="#top" aria-label="Diffusion ReRoll home">
-          <span class="wordmark-mark" aria-hidden="true"></span>
+          <img
+            class="wordmark-mark"
+            src="static/media/ReRollIcon.png"
+            alt=""
+            width="64"
+            height="66"
+            aria-hidden="true"
+          />
           <span>Diffusion ReRoll</span>
         </a>
         <nav class="desktop-nav" aria-label="Primary navigation">
@@ -52,11 +60,12 @@
           <p class="subtitle">Revisable Denoising for Robotic Sequential Prediction</p>
           <p class="hero-claim">
             A diffusion process that respects the <strong>temporal meaning</strong> of a
-            sequence—and preserves <strong>cross-horizon revisability</strong>.
+            sequence<br />
+            and preserves <strong>cross-horizon revisability</strong>.
           </p>
 
           <div class="authors" aria-label="Authors">
-            <a href="https://seonsoo-p1.github.io/DMCM/#" rel="noreferrer">Seonsoo Kim</a>
+            <a href="https://seonsoo-p1.github.io/SeonsooKim.github.io/#" rel="noreferrer">Seonsoo Kim</a>
             <span>Seongil Hong</span>
             <a href="https://jgkang1210.github.io/" rel="noreferrer">Jun-Gill Kang</a>
           </div>
@@ -259,7 +268,7 @@
               levels determine what is visible, uncertain, and still modifiable during generation.
             </p>
             <p>
-              ReRoll turns this noise schedule into a cross-horizon refinement mechanism: resolved
+              ReRoll turns this noise schedule into a cross-horizon revision mechanism: resolved
               regions can become uncertain again, exchange information with the rest of the horizon,
               and settle into a more compatible sequence.
             </p>
@@ -351,13 +360,13 @@
       <section class="section-space soft-section" id="abstract">
         <div class="shell narrow">
           <p class="section-kicker">Abstract</p>
-          <h2>Iterative refinement across the prediction horizon</h2>
+          <h2>Iterative revision across the prediction horizon</h2>
           <p class="abstract">
             Diffusion-based sequence predictors commonly follow a single, irreversible denoising
             process. Diffusion ReRoll instead selectively re-noises sufficiently resolved regions
             while the rest of the horizon continues denoising. These regions can then be refined
             again using updated context from the sequence. The resulting structured re-noising
-            enables cross-horizon refinement while preserving local consistency. Across long-horizon
+            enables cross-horizon revision while preserving local consistency. Across long-horizon
             planning, diffusion-policy-style action prediction, and unified video–action modeling,
             ReRoll improves performance over full-sequence and causal denoising baselines.
           </p>
@@ -555,7 +564,7 @@
       <section class="section-space results-section" id="results">
         <div class="shell">
           <p class="section-kicker light">Results</p>
-          <h2>One refinement principle, three robotic settings</h2>
+          <h2>One revision principle, three robotic settings</h2>
 
           <div class="result-grid">
             <article class="result-card">

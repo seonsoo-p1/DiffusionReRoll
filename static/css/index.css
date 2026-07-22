@@ -102,32 +102,10 @@ button {
 }
 
 .wordmark-mark {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  border-radius: 7px;
-  background: linear-gradient(145deg, var(--cyan), var(--blue) 52%, var(--violet));
-  box-shadow: 0 6px 16px rgba(49, 84, 232, 0.25);
-}
-
-.wordmark-mark::before,
-.wordmark-mark::after {
-  position: absolute;
-  content: "";
-  inset-inline: 5px;
-  height: 3px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-}
-
-.wordmark-mark::before {
-  top: 7px;
-  transform: rotate(10deg);
-}
-
-.wordmark-mark::after {
-  bottom: 7px;
-  transform: rotate(-10deg);
+  display: block;
+  width: 30px;
+  height: auto;
+  flex: 0 0 auto;
 }
 
 .desktop-nav {
@@ -301,7 +279,7 @@ a.resource-button:focus-visible {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #070914;
+  background: #fff;
   box-shadow: var(--shadow);
 }
 
@@ -309,7 +287,7 @@ a.resource-button:focus-visible {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #070914;
+  background: #fff;
   object-fit: contain;
 }
 
