@@ -242,6 +242,11 @@ button {
   stroke-width: 1.8;
 }
 
+.resource-button .arxiv-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
 a.resource-button:hover,
 a.resource-button:focus-visible {
   border-color: var(--blue);
