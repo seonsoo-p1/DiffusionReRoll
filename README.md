@@ -1,62 +1,79 @@
 # Diffusion ReRoll project page
 
-Static, GitHub Pages-ready website for:
-
-> **Diffusion ReRoll: Revisable Denoising for Robotic Sequential Prediction**
-
-The layout follows the familiar academic project-page structure popularized by
-[Nerfies](https://nerfies.github.io/), with original HTML and CSS tailored to
-Diffusion ReRoll.
+Static, GitHub Pages-ready website for **Diffusion ReRoll: Revisable Denoising for
+Robotic Sequential Prediction**, accepted at **CoRL 2026 (Spotlight)**.
 
 ## Current page flow
 
-1. Title, authors, affiliation, and resource controls
-2. Playable project-overview video
-3. Overview with the supplied full-sequence, causal, and ReRoll denoising visuals
-4. Robotics scope: OGBench planning, LIBERO-10/RoboCasa policy learning, and UWM video–action generation
-5. Characteristic failure cases and ReRoll correction
-6. Deployment and training schedules, benchmark results, conclusion, and BibTeX
+1. Title, acceptance notice, authors, and resources
+2. Project-overview video
+3. Full-sequence, causal, and ReRoll denoising overview
+4. Robotics scope: OGBench, policy learning, UWM, and real-world navigation
+5. Failure cases, method, and bidirectional denoising
+6. Four result comparisons and the updated ReRoll-event ablation
+7. Real-world navigation: 15× example and annotated clockwise/counterclockwise comparisons
+8. Conclusion and BibTeX
 
-The method figures and animated denoising visuals are the original supplied assets. Supporting
-robotics and failure-case stills in `static/images/video/` were derived from the supplied project
-video. The page embeds the complete project video and a shorter bidirectional-mode excerpt.
-
-## Preview locally
-
-From this directory:
+## Preview and validate
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>.
-
-Run the dependency-free structural check with:
+Open <http://localhost:8000>. The navigation comparisons offer grouped play, pause,
+and restart, alongside each video's native controls. Finished clips hold their last
+frame while longer clips continue. Videos do not autoplay.
 
 ```bash
 python3 scripts/check_site.py
 node --check static/js/index.js
 ```
 
-## Content to finalize before publishing
+## Media and result provenance
 
-Before publishing:
+The September 2026 update uses `data/Diffusion_ReRoll_AfterRebuttal.pdf` and
+`static/media/Compressed_Overview_ForLooking.mp4` as reference material. The Paper
+button and overview player retain their existing assets until their replacements
+are ready: `data/DiffusionReRoll.pdf` and
+`static/images/video/Diffusion_ReRoll_Video.mp4`.
 
-- replace the disabled Paper and Code controls with public URLs;
-- optionally replace the local MP4 with a YouTube embed;
-- update the BibTeX entry if a public publication venue becomes available;
+The four summary charts match the updated overview and paper (full-sequence,
+Forcing, ReRoll, respectively):
 
-The page intentionally does **not** include the confidential manuscript PDF.
+| Setting | Success (%) | Paper source |
+| --- | --- | --- |
+| OGBench guidance average | 38.4 / 72.8 / 88.1 | Table 1 |
+| LIBERO-10 official average | 40.1 / 49.1 / 62.7 | Table 2 |
+| UWM OOD joint policy | 58.1 / 60.7 / 69.7 | Table 4 |
+| Navigation CW/CCW average | 0.0 / 22.2 / 72.2 | Figure 13 |
 
-## Publish with GitHub Pages
+The navigation summary averages Figure 13's circuit means equally across clockwise
+and counterclockwise directions. The separate navigation-results plot is not shown
+on the page. The event ablation uses the supplied
+`static/media/UpdatedResult_ReRollEvents.png`; failure illustrations use
+`static/images/Full2.png` and `static/images/forcing2.png`.
 
-1. Create a repository such as `diffusion-reroll`.
-2. Push this directory to its `main` branch.
-3. In **Settings → Pages**, select **Deploy from a branch**.
-4. Choose `main` and `/ (root)`, then save.
+The seven navigation originals are preserved in `static/media/NavigationVid/`.
+Web copies are in `static/media/navigation/`, with posters in
+`static/images/navigation/`. To regenerate them (requires FFmpeg and FFprobe):
 
-The resulting project URL follows this pattern:
-
-```text
-https://USERNAME.github.io/diffusion-reroll/
+```bash
+python3 scripts/prepare_navigation_media.py
 ```
+
+The six fixed-camera clips crop to the course and retain their baked-in 5× speed.
+Full-sequence and Forcing clips include timed circles highlighting failures, matching
+the reference overview. The clockwise full-sequence clip omits its last 0.8 seconds
+to stop before the reversal after failure. Other clips retain their original duration;
+the moving-camera 15× example also retains its full frame. The manifest records
+source paths, crops, edits, dimensions, durations, and frame counts. All web videos
+use silent H.264 MP4 with faststart.
+
+## Publishing
+
+The page is ready for GitHub Pages from the repository root. Add a public Code URL
+when available. Update the Paper target and overview video when the final assets
+are supplied. Source edits alone do not publish the site.
+
+The layout follows the academic project-page structure popularized by
+[Nerfies](https://nerfies.github.io/), with original HTML and CSS.

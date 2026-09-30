@@ -27,7 +27,7 @@ class SiteParser(HTMLParser):
         if tag == "img" and values.get("alt") is None:
             self.images_without_alt.append(values.get("src", "<unknown>"))
 
-        for attribute in ("src", "href"):
+        for attribute in ("src", "href", "poster"):
             value = values.get(attribute)
             if not value:
                 continue

@@ -1,0 +1,220 @@
+[
+  {
+    "source": "static/media/NavigationVid/FullSequenceClock5X.mp4",
+    "video": "static/media/navigation/full-clockwise.mp4",
+    "poster": "static/images/navigation/full-clockwise.jpg",
+    "method": "Full-sequence",
+    "direction": "Clockwise",
+    "source_playback_speed": 5,
+    "crop_xywh": [
+      0,
+      96,
+      1280,
+      496
+    ],
+    "width": 960,
+    "height": 372,
+    "duration_seconds": 2.4,
+    "frame_count": 72,
+    "frame_rate": "30/1",
+    "size_bytes": 96060,
+    "audio": false,
+    "trim_end_seconds": 0.8,
+    "trim_end_frames": 24,
+    "failure_annotations": [
+      {
+        "shape": "circle",
+        "center_xy": [
+          132,
+          93
+        ],
+        "radius_pixels": 46,
+        "stroke_pixels": 5,
+        "color": "#315cff",
+        "start_seconds": 1.6,
+        "end_seconds": 2.4
+      }
+    ]
+  },
+  {
+    "source": "static/media/NavigationVid/ForcingClock5X.mp4",
+    "video": "static/media/navigation/forcing-clockwise.mp4",
+    "poster": "static/images/navigation/forcing-clockwise.jpg",
+    "method": "Diffusion Forcing",
+    "direction": "Clockwise",
+    "source_playback_speed": 5,
+    "crop_xywh": [
+      0,
+      96,
+      1280,
+      496
+    ],
+    "width": 960,
+    "height": 372,
+    "duration_seconds": 3.5,
+    "frame_count": 105,
+    "frame_rate": "30/1",
+    "size_bytes": 139740,
+    "audio": false,
+    "trim_end_seconds": 0,
+    "trim_end_frames": 0,
+    "failure_annotations": [
+      {
+        "shape": "circle",
+        "center_xy": [
+          190,
+          64
+        ],
+        "radius_pixels": 48,
+        "stroke_pixels": 5,
+        "color": "#315cff",
+        "start_seconds": 2.5,
+        "end_seconds": 3.5
+      }
+    ]
+  },
+  {
+    "source": "static/media/NavigationVid/ReRollClock5X.mp4",
+    "video": "static/media/navigation/reroll-clockwise.mp4",
+    "poster": "static/images/navigation/reroll-clockwise.jpg",
+    "method": "Diffusion ReRoll",
+    "direction": "Clockwise",
+    "source_playback_speed": 5,
+    "crop_xywh": [
+      0,
+      96,
+      1280,
+      496
+    ],
+    "width": 960,
+    "height": 372,
+    "duration_seconds": 23.634,
+    "frame_count": 709,
+    "frame_rate": "30/1",
+    "size_bytes": 845947,
+    "audio": false
+  },
+  {
+    "source": "static/media/NavigationVid/FullSequenceCounter5X.mp4",
+    "video": "static/media/navigation/full-counterclockwise.mp4",
+    "poster": "static/images/navigation/full-counterclockwise.jpg",
+    "method": "Full-sequence",
+    "direction": "Counterclockwise",
+    "source_playback_speed": 5,
+    "crop_xywh": [
+      0,
+      96,
+      1280,
+      496
+    ],
+    "width": 960,
+    "height": 372,
+    "duration_seconds": 12.167,
+    "frame_count": 365,
+    "frame_rate": "30/1",
+    "size_bytes": 473343,
+    "audio": false,
+    "trim_end_seconds": 0,
+    "trim_end_frames": 0,
+    "failure_annotations": [
+      {
+        "shape": "circle",
+        "center_xy": [
+          595,
+          122
+        ],
+        "radius_pixels": 47,
+        "stroke_pixels": 5,
+        "color": "#ff3038",
+        "start_seconds": 10.5,
+        "end_seconds": 12.166667
+      }
+    ]
+  },
+  {
+    "source": "static/media/NavigationVid/ForcingCounter5X.mp4",
+    "video": "static/media/navigation/forcing-counterclockwise.mp4",
+    "poster": "static/images/navigation/forcing-counterclockwise.jpg",
+    "method": "Diffusion Forcing",
+    "direction": "Counterclockwise",
+    "source_playback_speed": 5,
+    "crop_xywh": [
+      0,
+      96,
+      1280,
+      496
+    ],
+    "width": 960,
+    "height": 372,
+    "duration_seconds": 12.434,
+    "frame_count": 373,
+    "frame_rate": "30/1",
+    "size_bytes": 479061,
+    "audio": false,
+    "trim_end_seconds": 0,
+    "trim_end_frames": 0,
+    "failure_annotations": [
+      {
+        "shape": "circle",
+        "center_xy": [
+          770,
+          161
+        ],
+        "radius_pixels": 50,
+        "stroke_pixels": 5,
+        "color": "#ff3038",
+        "start_seconds": 8.55,
+        "end_seconds": 12.433333
+      },
+      {
+        "shape": "circle",
+        "center_xy": [
+          420,
+          177
+        ],
+        "radius_pixels": 50,
+        "stroke_pixels": 5,
+        "color": "#ff3038",
+        "start_seconds": 11.9,
+        "end_seconds": 12.433333
+      }
+    ]
+  },
+  {
+    "source": "static/media/NavigationVid/ReRollCounter5X.mp4",
+    "video": "static/media/navigation/reroll-counterclockwise.mp4",
+    "poster": "static/images/navigation/reroll-counterclockwise.jpg",
+    "method": "Diffusion ReRoll",
+    "direction": "Counterclockwise",
+    "source_playback_speed": 5,
+    "crop_xywh": [
+      0,
+      96,
+      1280,
+      496
+    ],
+    "width": 960,
+    "height": 372,
+    "duration_seconds": 23.234,
+    "frame_count": 697,
+    "frame_rate": "30/1",
+    "size_bytes": 865961,
+    "audio": false
+  },
+  {
+    "source": "static/media/NavigationVid/15XNavVid(ReRoll).mp4",
+    "video": "static/media/navigation/reroll-15x.mp4",
+    "poster": "static/images/navigation/reroll-15x.jpg",
+    "method": "Diffusion ReRoll",
+    "direction": "Example",
+    "source_playback_speed": 15,
+    "crop_xywh": null,
+    "width": 960,
+    "height": 540,
+    "duration_seconds": 7.2,
+    "frame_count": 216,
+    "frame_rate": "30/1",
+    "size_bytes": 1929432,
+    "audio": false
+  }
+]
