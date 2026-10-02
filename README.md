@@ -33,9 +33,12 @@ node --check static/js/index.js
 
 The September 2026 update uses `data/Diffusion_ReRoll_AfterRebuttal.pdf` and
 `static/media/Compressed_Overview_ForLooking.mp4` as reference material. The Paper
-button and overview player retain their existing assets until their replacements
-are ready: `data/DiffusionReRoll.pdf` and
-`static/images/video/Diffusion_ReRoll_Video.mp4`.
+button retains `data/DiffusionReRoll.pdf` until the final paper is ready.
+
+The overview player uses `static/images/video/ReRoll_NewVid_web.mp4`, a 1080p web
+copy of the October 2026 upload `static/images/video/ReRoll_NewVid.mp4`. The original
+upload stays local. The web copy preserves its full duration and audio, with H.264
+video (CRF 22) and faststart for browser playback.
 
 The four summary charts match the updated overview and paper (full-sequence,
 Forcing, ReRoll, respectively):
@@ -72,8 +75,8 @@ use silent H.264 MP4 with faststart.
 ## Publishing
 
 The page is ready for GitHub Pages from the repository root. Add a public Code URL
-when available. Update the Paper target and overview video when the final assets
-are supplied. Source edits alone do not publish the site.
+when available. Update the Paper target when the final paper is ready. Source
+edits alone do not publish the site.
 
 The layout follows the academic project-page structure popularized by
 [Nerfies](https://nerfies.github.io/), with original HTML and CSS.
