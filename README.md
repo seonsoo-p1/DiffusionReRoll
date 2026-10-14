@@ -33,7 +33,7 @@ node --check static/js/index.js
 
 The September 2026 update uses `data/Diffusion_ReRoll_AfterRebuttal.pdf` and
 `static/media/Compressed_Overview_ForLooking.mp4` as reference material. The Paper
-button retains `data/DiffusionReRoll.pdf` until the final paper is ready.
+button links to the camera-ready paper, `data/Diffusion_Re_Roll__CamReady.pdf`.
 
 The overview player uses `static/images/video/ReRoll_NewVid_web.mp4`, a 1080p web
 copy of the October 2026 upload `static/images/video/ReRoll_NewVid.mp4`. The original
@@ -75,8 +75,7 @@ use silent H.264 MP4 with faststart.
 ## Publishing
 
 The page is ready for GitHub Pages from the repository root. Add a public Code URL
-when available. Update the Paper target when the final paper is ready. Source
-edits alone do not publish the site.
+when available. Source edits alone do not publish the site.
 
 The layout follows the academic project-page structure popularized by
 [Nerfies](https://nerfies.github.io/), with original HTML and CSS.
